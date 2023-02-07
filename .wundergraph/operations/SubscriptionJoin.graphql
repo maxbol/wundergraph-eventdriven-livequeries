@@ -1,0 +1,13 @@
+subscription SubscriptionJoin ($driverId: Int! @internal) {
+	drivers: drivers_driversSubscription {
+		id @export(as: "driverId")
+		name
+		cars: _join @transform(get: "cars_carsByDriver") {
+			cars_carsByDriver(driverId: $driverId) {
+				id
+				driverId
+				name
+			}
+		}
+	}
+}

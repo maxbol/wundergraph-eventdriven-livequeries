@@ -1,0 +1,6 @@
+subscription {
+	drivers_driversSubscription {
+		id
+		name
+	}
+}

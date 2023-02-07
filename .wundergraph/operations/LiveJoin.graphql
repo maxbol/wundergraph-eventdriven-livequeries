@@ -1,0 +1,13 @@
+query ($driverId: Int! @internal) @drivers_live @cars_live {
+	drivers: drivers_drivers {
+		id @export(as: "driverId")
+		name
+		cars: _join @transform(get: "cars_carsByDriver") {
+			cars_carsByDriver(driverId: $driverId) {
+				id
+				driverId
+				name
+			}
+		}
+	}
+}

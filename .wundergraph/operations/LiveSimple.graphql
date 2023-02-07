@@ -1,0 +1,6 @@
+query @drivers_live {
+	drivers: drivers_drivers {
+		id
+		name
+	}
+}

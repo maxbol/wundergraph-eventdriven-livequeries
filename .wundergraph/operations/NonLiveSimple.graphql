@@ -1,0 +1,6 @@
+query {
+	drivers: drivers_drivers {
+		id
+		name
+	}
+}
