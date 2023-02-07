@@ -25,6 +25,7 @@ export function randomDriverChange() {
 
   if (car.driverId === driverId) {
     randomDriverChange();
+    return;
   }
 
   car.driverId = driverId;
