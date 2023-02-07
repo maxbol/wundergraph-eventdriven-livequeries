@@ -10,7 +10,7 @@ export const subscriber = new Redis();
 
 export const liveQueryStore = new InMemoryLiveQueryStore();
 
-export function randomDriverChange() {
+export async function randomDriverChange(): Promise<void> {
   const driverIds = Array.from(
     new Set(baseData.cars.map((car) => car.driverId))
   );
@@ -24,8 +24,7 @@ export function randomDriverChange() {
   const driverId = driverIds[Math.round(Math.random() * (driverIds.length - 1))];
 
   if (car.driverId === driverId) {
-    randomDriverChange();
-    return;
+    return randomDriverChange();
   }
 
   car.driverId = driverId;
@@ -35,7 +34,7 @@ export function randomDriverChange() {
     driverId: car.driverId
   };
 
-  return publisher.publish(EVENT_CARDRIVERCHANGE, JSON.stringify(change));
+  await publisher.publish(EVENT_CARDRIVERCHANGE, JSON.stringify(change));
 }
 
 subscriber.on("message", (_: string, data: any) => {
